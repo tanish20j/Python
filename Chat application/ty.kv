@@ -1,0 +1,183 @@
+WindowManager:
+    First:
+    Second:
+    Third:
+    Fourth:
+
+
+<First>:
+    name:"first"
+
+    FloatLayout:
+        cols:1
+        size:root.width,root.height
+
+
+
+        FloatLayout:
+            cols:2
+            Label:
+                text:"Welcome\n\n\n to\n\n\nE-classroom"
+                font_size:40
+                size_hint:0.4,1
+                pos_hint:{"x":0,"y":0}
+
+
+            Button:
+                text:"Student"
+                size_hint:0.4,0.1
+                pos_hint:{"x":0.55,"y":0.6}
+
+
+                on_press:
+                    app.root.current="fourth"
+                    root.manager.transition.direction="left"
+
+            Button:
+                text:"Teacher"
+                size_hint:0.4,0.1
+                pos_hint:{"x":0.55,"y":0.2}
+                on_press:
+                    app.root.current="third"
+                    root.manager.transition.direction="left"
+
+
+
+
+
+<Second>:
+    name:"second"
+    FloatLayout:
+        size:root.width, root.height
+        rows:2
+        canvas.before:
+            Color:
+                rgb: .6, .6, .6
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            id:user
+            size_hint:0.15,0.15
+            pos_hint:{"x":0,"y":0.85}
+
+        FloatLayout:
+            cols:2
+            Label:
+                id:online
+                size_hint:0.2,.8
+                text_size:self.size
+                valign:"top"
+                pos_hint:{"x":0.01,"y":0.01}
+                canvas.before:
+                    Color:
+                        rgb: 0, .6, .6
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+            Label:
+                halign:"left"
+                valign:"top"
+                id:msglog
+                text:""
+                text_size:self.size
+                size_hint:.75,0.75
+                pos_hint:{"x":0.24,"y":0.18}
+                canvas.before:
+                    Color:
+                        rgb: 0, .6, .6
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+            TextInput:
+                id:sms
+                size_hint:0.55,0.1
+                pos_hint:{"x":0.24,"y":0.01}
+            Button:
+                text:"Send"
+                size_hint:0.2,0.1
+                pos_hint:{"x":0.79,"y":0.01}
+                on_press:
+                    root.send()
+
+
+
+<Third>:
+    name:"third"
+    FloatLayout:
+        cols:1
+        size:root.width,root.height
+
+
+
+        FloatLayout:
+            cols:2
+            Label:
+                text:"Click\n\n\n your\n\n\n name"
+                font_size:40
+                size_hint:0.4,1
+                pos_hint:{"x":0,"y":0}
+
+
+            Button:
+                text:"Dipti Ma'am"
+                size_hint:0.4,0.1
+                pos_hint:{"x":0.55,"y":0.7}
+                on_press:
+                    root.manager.screens[1].ids.user.text = "Dipti Ma'am"
+                    root.op1()
+                    app.root.current="second"
+                    root.manager.transition.direction="left"
+                    root.manager.screens[1].connect()
+
+
+
+            Button:
+                text:"Kiran Ma'am"
+                size_hint:0.4,0.1
+                pos_hint:{"x":0.55,"y":0.4}
+                on_press:
+                    root.op2()
+                    root.manager.screens[1].ids.user.text = "Kiran Ma'am"
+                    app.root.current="second"
+                    root.manager.transition.direction="left"
+                    root.manager.screens[1].connect()
+
+            Button:
+                text:"Dhanalakshmi Ma'am"
+                size_hint:0.4,0.1
+                pos_hint:{"x":0.55,"y":0.1}
+                on_press:
+                    root.manager.screens[1].ids.user.text = "Dhanalakshmi Ma'am"
+                    root.op3()
+                    app.root.current="second"
+                    root.manager.transition.direction="left"
+                    root.manager.screens[1].connect()
+
+
+<Fourth>:
+    name:"fourth"
+    FloatLayout:
+        cols:1
+        Label:
+            text:"Enter your name"
+            size_hint:0.7,0.4
+            pos_hint:{"x":0.1,"y":0.6}
+            font_size:40
+
+
+        TextInput:
+            id:studentname
+            size_hint:0.7,0.2
+            pos_hint:{"x":0.1,"y":0.2}
+        Button:
+            text:"Submit"
+            size_hint:0.5,0.2
+            pos_hint:{"x":0.1,"y":0.01}
+            on_press:
+                root.btn()
+                root.manager.screens[1].ids.user.text = root.ids.studentname.text
+                app.root.current="second"
+                root.manager.transition.direction="left"
+                root.manager.screens[1].connect()
